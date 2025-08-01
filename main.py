@@ -16,7 +16,6 @@ hand_landmarker_result = mp.tasks.vision.HandLandmarkerResult
 vision_running_mode = mp.tasks.vision.RunningMode
 model_path = r"C:\Users\rowdh\OneDrive\Documents\Tomfoolery\Personal Project\face-detector\hand_landmarker.task"
 
-# Captures the video from the web cam using opencv
 cam = cv.VideoCapture(0)
 latest_results = [""]
 def print_result(result: hand_landmarker_result, output_image, timestamp_ms: int):
@@ -31,18 +30,15 @@ options = hand_landmarker_options(
 )
 detector = hand_landmarker.create_from_options(options)
 while cam:
-    # bool is whether or not a frame was captured. 
-    # frame is the numpy array
-    bool, frame = cam.read()
+    
+    captured, frame = cam.read()
 
-    # inverses the frames to mirror what you see irl
     flipped_frame = cv.flip(frame, 1)
     timestamp_msec = int(cam.get(0))    
     rgb = cv.cvtColor(flipped_frame,4)
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
     detection = detector.detect_async(mp_image, timestamp_msec)
     cv.imshow("hand detector 9000",flipped_frame)
-   # print(latest_results)
     if cv.waitKey(1) == ord("q"):
         break
 
