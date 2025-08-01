@@ -38,6 +38,17 @@ while cam:
     rgb = cv.cvtColor(flipped_frame,4)
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
     detection = detector.detect_async(mp_image, timestamp_msec)
+    font = cv.FONT_HERSHEY_SCRIPT_SIMPLEX 
+    if latest_results[-1]:
+        last_result = latest_results[-1]
+        if len(last_result) == 2:
+            cv.putText(flipped_frame,'Two Hands',(400, 110), font, 4,(0,0,0),2,cv.LINE_AA)
+        elif len(last_result) == 1:
+            hand_1 = last_result[-1][-1].display_name
+            if hand_1 == "Left":
+                cv.putText(flipped_frame,'Right',(500,110), font, 4,(0,0,0),2,cv.LINE_AA)
+            elif hand_1 == "Right":
+                cv.putText(flipped_frame,'Left',(500,110), font, 4,(0,0,0),2,cv.LINE_AA)
     cv.imshow("hand detector 9000",flipped_frame)
     if cv.waitKey(1) == ord("q"):
         break
@@ -51,16 +62,7 @@ while cam:
     # [-1]: [[Category(index=1, score=0.5256191492080688, display_name='Left', category_name='Left')]]
     # [-1][-1]:[Category(index=1, score=0.5256191492080688, display_name='Left', category_name='Left')]
     # [-1][-1][-1]: Left
-    if latest_results[-1]:
-        last_result = latest_results[-1]
-        if len(last_result) == 2:
-            print("Two Hands")
-        elif len(last_result) == 1:
-            hand_1 = last_result[-1][-1].display_name
-            if hand_1 == "Left":
-                print("Right")
-            elif hand_1 == "Right":
-                print("Left")
+    
 
 cam.release()
 cv.destroyAllWindows()
