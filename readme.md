@@ -1,7 +1,7 @@
-This is a work-in-progress hand detection program written in python using the opencv and mediapipe libraries. 
+This is a hand detection program written in python using the opencv and mediapipe libraries. 
 
-Features that will be included:
+Features that are included:
 - Both hands detection ✅
 - Left or Right hand detection ✅
 
-This program will work by receiving input via the web cam, applying the necessary algorithm and displaying the output in text on the video in real-time.
+No set up is required for this program except for cloning & running it if you'd like to try it out yourself.
