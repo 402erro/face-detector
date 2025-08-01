@@ -41,7 +41,7 @@ while cam:
     rgb = cv.cvtColor(flipped_frame,4)
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
     detection = detector.detect_async(mp_image, timestamp_msec)
-    cv.imshow("face detector 9000",flipped_frame)
+    cv.imshow("hand detector 9000",flipped_frame)
    # print(latest_results)
     if cv.waitKey(1) == ord("q"):
         break
